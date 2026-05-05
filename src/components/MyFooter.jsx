@@ -1,9 +1,6 @@
-const MyFooter = () => (
-  <footer className="d-flex bg-dark mt-2">
-    <span className="text-white m-auto p-2">
-      <strong>EPICODE</strong> - Copyright {new Date().getFullYear()}
-    </span>
-  </footer>
-)
 
-export default MyFooter
+const MyFooter = function () {
+  return <p className="text-center py-3 m-0 text-light bg-black">My E-Books App - {new Date().getFullYear()}</p>;
+};
+
+export default MyFooter;

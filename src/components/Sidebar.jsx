@@ -1,19 +1,18 @@
 import { Component } from "react";
-import { Form,Button } from "react-bootstrap";
+import CommentArea from "./CommentArea";
+import SelectedBookCover from "./SelectedBookCover";
+import ShowComments from "./RenderComments";
 
 class Sidebar extends Component {
   render() {
     return (
-      <Form>
-      <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-        <Form.Label>Scrivi il tuo commento</Form.Label>
-        <Form.Control as="textarea" rows={3} />
-        <Button className="mt-2">Aggiungi</Button>
-      </Form.Group>
-      </Form>
+      <div className="mt-5">
+        <SelectedBookCover selectedBook={this.props.selectedBook} />
+        <CommentArea selectedBook={this.props.selectedBook} />
+        {/* <ShowComments selectedBook={this.props.selectedBook} /> */}
+      </div>
     );
   }
 }
 
-
-export default Sidebar
+export default Sidebar;

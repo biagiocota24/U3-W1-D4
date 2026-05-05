@@ -1,41 +1,30 @@
+import fantasy from "../assets/BOOKS/fantasy.json";
+import scifi from "../assets/BOOKS/scifi.json";
+import romance from "../assets/BOOKS/romance.json";
+import horror from "../assets/BOOKS/horror.json";
+import history from "../assets/BOOKS/history.json";
 import { Component } from "react";
 import SingleBook from "./SingleBook";
-import { Col, Form, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 
-class BookList extends Component {
+class Booklist extends Component {
+//   state = {
+//     books: fantasy,
+//   };
   render() {
     return (
-      <>
-        <Row className="justify-content-center mt-5">
-          <Col xs={12} md={4} className="text-center">
-            <Form.Group>
-              <Form.Control
-                type="search"
-                placeholder="Cerca un libro"
-                value={this.props.searchQuery}
-                onChange={(e) => this.props.onSearchChange(e.target.value)}
-              />
-            </Form.Group>
-          </Col>
-        </Row>
-        <Row className="g-2 mt-3">
-          {this.props.books
-            .filter((b) =>
-              b.title.toLowerCase().includes(this.props.searchQuery.toLowerCase()),
-            )
-            .map((b) => (
-              <Col xs={12} md={4} key={b.asin}>
-                <SingleBook
-                  book={b}
-                  selected={this.props.selectedBook?.asin === b.asin}
-                  onSelectBook={this.props.onSelectBook}
-                />
-              </Col>
-            ))}
-        </Row>
-      </>
+      <Row xs={2} md={3} lg={4} xl={5} className="my-4 gy-3">
+        {this.props.books.map((book) => {
+          return (
+            <Col key={book.asin} className="d-flex flex-column"
+            onClick={()=> this.props.onSelect(book)} >
+              <SingleBook book={book} selected={this.props.selected?.asin === book.asin} />
+            </Col>
+          );
+        })}
+      </Row>
     );
   }
 }
 
-export default BookList;
+export default Booklist;
