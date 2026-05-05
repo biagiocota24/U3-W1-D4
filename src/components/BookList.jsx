@@ -1,12 +1,8 @@
-import { Component } from 'react'
-import SingleBook from './SingleBook'
-import { Col, Form, Row } from 'react-bootstrap'
+import { Component } from "react";
+import SingleBook from "./SingleBook";
+import { Col, Form, Row } from "react-bootstrap";
 
 class BookList extends Component {
-  state = {
-    searchQuery: '',
-  }
-
   render() {
     return (
       <>
@@ -16,8 +12,8 @@ class BookList extends Component {
               <Form.Control
                 type="search"
                 placeholder="Cerca un libro"
-                value={this.state.searchQuery}
-                onChange={(e) => this.setState({ searchQuery: e.target.value })}
+                value={this.props.searchQuery}
+                onChange={(e) => this.props.onSearchChange(e.target.value)}
               />
             </Form.Group>
           </Col>
@@ -25,17 +21,21 @@ class BookList extends Component {
         <Row className="g-2 mt-3">
           {this.props.books
             .filter((b) =>
-              b.title.toLowerCase().includes(this.state.searchQuery)
+              b.title.toLowerCase().includes(this.props.searchQuery.toLowerCase()),
             )
             .map((b) => (
               <Col xs={12} md={4} key={b.asin}>
-                <SingleBook book={b} />
+                <SingleBook
+                  book={b}
+                  selected={this.props.selectedBook?.asin === b.asin}
+                  onSelectBook={this.props.onSelectBook}
+                />
               </Col>
             ))}
         </Row>
       </>
-    )
+    );
   }
 }
 
-export default BookList
+export default BookList;
